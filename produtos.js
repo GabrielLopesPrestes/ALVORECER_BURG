@@ -1,110 +1,101 @@
-[
-  {
-    "categoria": "hamburgueres",
-    "slug": "hamburgueres",
-    "produtos": [
-      {
-        "nome": "Cheeseburger",
-        "preco": 22,
-        "descricao": "Clássico com queijo derretido.",
-        "imagem": "https://sl.bing.net/cu3DH6RISQe"
-      },
-      {
-        "nome": "Duplo Bacon",
-        "preco": 28,
-        "descricao": "Dois hambúrgueres e muito bacon.",
-        "imagem": "img/duplo-bacon.jpg"
-      },
-      {
-        "nome": "Veggie Burger",
-        "preco": 24,
-        "descricao": "Opção vegetariana deliciosa.",
-        "imagem": "img/veggie.jpg"
-      },
-      {
-        "nome": "Chicken Burger",
-        "preco": 25,
-        "descricao": "Peito de frango empanado crocante.",
-        "imagem": "img/chicken.jpg"
-      },
-      {
-        "nome": "Smash Burger",
-        "preco": 26,
-        "descricao": "Carne prensada e suculenta.",
-        "imagem": "img/smash.jpg"
-      }
-    ]
-  },
-  {
-    "categoria": "Bebidas",
-    "slug": "bebidas",
-    "produtos": [
-      {
-        "nome": "Refrigerante Lata",
-        "preco": 6,
-        "descricao": "Gelado e refrescante.",
-        "imagem": "img/refrigerante.jpg"
-      },
-      {
-        "nome": "Suco Natural",
-        "preco": 8,
-        "descricao": "Feito com frutas frescas.",
-        "imagem": "img/suco.jpg"
-      },
-      {
-        "nome": "Milkshake Chocolate",
-        "preco": 14,
-        "descricao": "Doce e cremoso.",
-        "imagem": "img/milkshake.jpg"
-      },
-      {
-        "nome": "Água Mineral",
-        "preco": 4,
-        "descricao": "Natural e saudável.",
-        "imagem": "img/agua.jpg"
-      },
-      {
-        "nome": "Cerveja Artesanal",
-        "preco": 12,
-        "descricao": "Sabor único e especial.",
-        "imagem": "img/cerveja.jpg"
-      }
-    ]
-  },
-  {
-    "categoria": "Batatas",
-    "slug": "batatas",
-    "produtos": [
-      {
-        "nome": "Batata Frita Tradicional",
-        "preco": 12,
-        "descricao": "Crocante e dourada.",
-        "imagem": "img/batata-tradicional.jpg"
-      },
-      {
-        "nome": "Batata Cheddar & Bacon",
-        "preco": 18,
-        "descricao": "Cheia de sabor.",
-        "imagem": "img/batata-cheddar.jpg"
-      },
-      {
-        "nome": "Batata Rústica",
-        "preco": 16,
-        "descricao": "Temperada e assada.",
-        "imagem": "img/batata-rustica.jpg"
-      },
-      {
-        "nome": "Batata Doce Frita",
-        "preco": 15,
-        "descricao": "Levemente adocicada.",
-        "imagem": "img/batata-doce.jpg"
-      },
-      {
-        "nome": "Batata Molho Especial",
-        "preco": 17,
-        "descricao": "Com molho secreto da casa.",
-        "imagem": "img/batata-molho.jpg"
-      }
-    ]
+import { carrinho, total, limpar } from "./carrinho.js";
+import { formatar, carregar, salvar } from "./utils.js";
+import { atualizarUI } from "./ui.js";
+
+const numeroWhatsApp = "5532988394464";
+
+const taxas = {
+  "Centro": 5,
+  "São Mateus": 7,
+  "Granbery": 6,
+  "Outros": 10
+};
+
+let numeroPedido = carregar("numeroPedido", 1);
+
+function desconto(total, cupom) {
+  cupom = cupom.trim().toUpperCase();
+  if (cupom === "DESCONTO10") return total * 0.10;
+  if (cupom === "DESCONTO5") return total * 0.05;
+  return 0;
+}
+
+function previsao() {
+  const agora = new Date();
+  agora.setMinutes(agora.getMinutes() + 40);
+  return agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+}
+
+export function enviarPedido() {
+  if (carrinho.length === 0) return alert("Seu carrinho está vazio.");
+
+  const nome = document.getElementById("nomeCliente").value.trim();
+  const telefone = document.getElementById("telefoneCliente").value.trim();
+  const obs = document.getElementById("obs").value.trim();
+  const cupom = document.getElementById("cupom").value.trim();
+  const tipo = document.querySelector("input[name='tipo']:checked").value;
+
+  if (!nome || !telefone) return alert("Preencha nome e telefone.");
+
+  let msg = `🍔 *Pedido #${String(numeroPedido).padStart(3, "0")}*%0A`;
+  msg += `👤 *Cliente:* ${nome}%0A`;
+  msg += `📞 *Telefone:* ${telefone}%0A%0A`;
+
+  msg += `*Itens:*%0A`;
+  carrinho.forEach(item => {
+    msg += `• ${item.nome} x${item.qtd} — R$ ${formatar(item.preco * item.qtd)}%0A`;
+  });
+
+  let valor = total();
+  const desc = desconto(valor, cupom);
+
+  if (desc > 0) {
+    msg += `%0A💸 *Cupom:* -R$ ${formatar(desc)}%0A`;
+    valor -= desc;
   }
-]
+
+  msg += `%0A💰 *Subtotal:* R$ ${formatar(valor)}%0A`;
+
+  if (tipo === "entrega") {
+    let enderecoCompleto = "";
+
+if (document.getElementById("endereco-auto").style.display === "block") {
+  enderecoCompleto = `${document.getElementById("rua").value}, ${document.getElementById("numero").value}, ${document.getElementById("bairroAuto").value}, ${document.getElementById("cidade").value} - ${document.getElementById("uf").value}`;
+} else {
+  enderecoCompleto = `${endereco}, Juiz de Fora, MG`;
+}
+
+    const bairro = document.getElementById("bairro").value;
+    const pagamento = document.getElementById("pagamento").value;
+    const troco = document.getElementById("troco").value || "Não informado";
+
+    if (!endereco) return alert("Informe o endereço.");
+
+    const taxa = taxas[bairro];
+    valor += taxa;
+
+    msg += `🏠 *Endereço:* ${endereco}%0A`;
+    msg += `📍 *Bairro:* ${bairro}%0A`;
+    msg += `🚚 *Taxa:* R$ ${formatar(taxa)}%0A`;
+    msg += `💳 *Pagamento:* ${pagamento}%0A`;
+
+    if (pagamento === "dinheiro") {
+      msg += `💵 *Troco:* ${troco}%0A`;
+    }
+
+    msg += `⏱️ *Previsão:* ${previsao()}%0A`;
+  }
+
+  if (obs) msg += `%0A📝 *Obs:* ${obs}%0A`;
+
+  msg += `%0A✅ *Total final:* R$ ${formatar(valor)}%0A`;
+  msg += `%0A✅ Pedido enviado automaticamente pelo site!`;
+
+  window.open(`https://wa.me/${numeroWhatsApp}?text=${msg}`, "_blank");
+
+  numeroPedido++;
+  salvar("numeroPedido", numeroPedido);
+
+  limpar();
+  atualizarUI();
+}
