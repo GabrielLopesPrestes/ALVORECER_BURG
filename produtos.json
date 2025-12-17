@@ -106,5 +106,20 @@
         "imagem": "img/batata-molho.jpg"
       }
     ]
-  }
+  },
+  {
+  "categoria": "Combos",
+  "produtos": [
+    {
+      "nome": "Combo Smash",
+      "descricao": "1 Smash + Batata + Refrigerante",
+      "preco": 32.00,
+      "imagem": "img/combo-smash.jpg",
+      "combo": true,
+      "itens": ["Clássico Smash", "Batata Frita", "Coca-Cola Lata"]
+    }
+  ]
+}
+  
 ]
+
