@@ -8,6 +8,7 @@
 </head>
 
 <body>
+
   <!-- HEADER -->
   <header>
     <h1>ALVORECER BURG</h1>
@@ -17,6 +18,7 @@
         <li><a href="#sobre">Sobre</a></li>
         <li><a href="#servicos">Serviços</a></li>
         <li><a href="#contato">Contato</a></li>
+        <li><a href="#meus-pedidos">Meus Pedidos</a></li>
       </ul>
     </nav>
   </header>
@@ -24,19 +26,70 @@
   <!-- CARDÁPIO DINÂMICO -->
   <main id="cardapio"></main>
 
+  <!-- FAVORITOS -->
+  <section id="favoritos" class="categoria">
+    <h2>⭐ Meus Favoritos</h2>
+    <div class="cards" id="cards-favoritos"></div>
+  </section>
+
+  <!-- MEUS PEDIDOS -->
+  <section id="meus-pedidos" class="categoria">
+   <h2>📦 Meus Pedidos</h2>
+   <div id="lista-pedidos" class="pedidos-container"></div>
+  </section>
+
   <!-- SOBRE -->
-  <section id="sobre">
-    <h2>Sobre</h2>
-    <p>Este é um site de exemplo criado com HTML, CSS e JavaScript.</p>
+  <section id="sobre" class="sobre-premium">
+    <div class="sobre-container">
+
+      <div class="sobre-texto">
+        <h2>Sobre Nós</h2>
+        <p>
+          No <strong>ALVORECER BURG</strong>, acreditamos que um hambúrguer de verdade começa com ingredientes frescos, 
+          técnicas artesanais e muito amor pelo que fazemos. Somos uma hamburgueria independente de Juiz de Fora, 
+          criada para quem valoriza sabor, qualidade e atendimento de verdade.
+        </p>
+
+        <p>
+          Cada smash é preparado na hora, com carne 100% bovina, pão macio e molhos autorais. 
+          Nosso objetivo é simples: entregar uma experiência que faça você querer voltar sempre.
+        </p>
+
+        <p>
+          Seja para matar a fome, celebrar com amigos ou curtir um momento especial, 
+          estamos aqui para servir o melhor hambúrguer da cidade.
+        </p>
+
+        <div class="sobre-info">
+          <div>
+            <h3>+ de 50 sabores</h3>
+            <p>Cardápio variado e atualizado sempre.</p>
+          </div>
+          <div>
+            <h3>Entrega rápida</h3>
+            <p>Chega quentinho e no ponto.</p>
+          </div>
+          <div>
+            <h3>Ingredientes premium</h3>
+            <p>Qualidade é nossa prioridade.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sobre-imagem">
+        <img src="img/sobre.jpg" alt="Hambúrguer artesanal">
+      </div>
+
+    </div>
   </section>
 
   <!-- SERVIÇOS -->
   <section id="servicos">
     <h2>Serviços</h2>
     <ul>
-      <li>Delivery de hamburgueres artesanais</li>
+      <li>Delivery de hambúrgueres artesanais</li>
       <li>Atendimento personalizado</li>
-      <li>Consultoria em eventos</li>
+      <li>Consultoria para eventos</li>
     </ul>
   </section>
 
@@ -44,11 +97,12 @@
   <section id="contato">
     <h2>Contato</h2>
     <div class="contato-container">
+
       <div class="contato-item">
         <a href="https://wa.me/5532988394464" target="_blank">
           <img src="img/whatsapp.png" alt="WhatsApp" class="icon" />
         </a>
-        <p><strong>WhatsApp:</strong> (32) 9839-4464</p>
+        <p><strong>WhatsApp:</strong> (32) 98839-4464</p>
       </div>
 
       <div class="contato-item">
@@ -62,11 +116,9 @@
         <a href="https://www.ifood.com.br/delivery/jf/minha-lanchonete" target="_blank">
           <img src="img/ifood.png" alt="iFood" class="icon" />
         </a>
-        <p>
-          <strong>iFood:</strong>
-          <a href="https://www.ifood.com.br/delivery/jf/minha-lanchonete" target="_blank">Peça agora</a>
-        </p>
+        <p><strong>iFood:</strong> Peça agora</p>
       </div>
+
     </div>
   </section>
 
@@ -87,51 +139,119 @@
 
   <!-- MODAL DE FINALIZAÇÃO -->
   <div id="modal" class="modal">
-    <div class="modal-content">
-      <span id="fechar">&times;</span>
-      <h2>Finalizar Pedido</h2>
+    <div class="modal-content premium">
 
-      <label><input type="radio" name="tipo" value="retirada" checked /> Retirar no local</label>
-      <label><input type="radio" name="tipo" value="entrega" /> Entrega</label>
+      <span id="fechar" class="close-btn">&times;</span>
 
-      <div id="dados-entrega" style="display: none">
-        <label>Endereço:</label>
-        <input type="text" id="endereco" placeholder="Digite seu endereço" />
+      <h2 class="modal-title">Finalizar Pedido</h2>
 
-        <label>Bairro:</label>
-        <select id="bairro">
-          <option value="Centro">Centro</option>
-          <option value="São Mateus">São Mateus</option>
-          <option value="Granbery">Granbery</option>
-          <option value="Outros">Outros</option>
-        </select>
+      <!-- ENTREGA OU RETIRADA -->
+      <div class="modal-section">
+        <h3 class="section-title">Como deseja receber?</h3>
 
-        <label>Forma de pagamento:</label>
+        <label class="radio-option">
+          <input type="radio" name="tipo" value="retirada" checked />
+          <span>Retirar no local</span>
+        </label>
+
+        <label class="radio-option">
+          <input type="radio" name="tipo" value="entrega" />
+          <span>Entrega</span>
+        </label>
+      </div>
+
+      <!-- ENDEREÇO PREMIUM -->
+      <div id="endereco-premium" class="modal-section" style="display:none;">
+        <h3 class="section-title">Endereço para entrega</h3>
+
+        <label>CEP</label>
+        <input type="text" id="cep" placeholder="Digite seu CEP" maxlength="9">
+
+        <button id="btn-buscar-cep" class="btn-secondary">Buscar endereço</button>
+
+        <p id="cep-erro" class="error-msg">CEP não encontrado.</p>
+
+        <button id="btn-nao-sabe-cep" class="link-btn">Não sabe seu CEP?</button>
+
+        <div id="endereco-auto" class="fade" style="display:none;">
+          <label>Rua</label>
+          <input type="text" id="rua" readonly>
+
+          <label>Bairro</label>
+          <input type="text" id="bairroAuto" readonly>
+
+          <label>Cidade</label>
+          <input type="text" id="cidade" readonly>
+
+          <label>Estado</label>
+          <input type="text" id="uf" readonly>
+
+          <label>Número</label>
+          <input type="text" id="numero" placeholder="Digite o número">
+        </div>
+
+        <div id="busca-sem-cep" class="fade" style="display:none;">
+          <label>Estado</label>
+          <input type="text" id="uf2" value="MG">
+
+          <label>Cidade</label>
+          <input type="text" id="cidade2" value="Juiz de Fora">
+
+          <label>Rua</label>
+          <input type="text" id="rua2" placeholder="Digite o nome da rua">
+
+          <button id="btn-buscar-rua" class="btn-secondary">Buscar CEP</button>
+
+          <select id="lista-ceps" style="display:none;"></select>
+        </div>
+      </div>
+
+      <!-- DADOS DO CLIENTE -->
+      <div class="modal-section">
+        <h3 class="section-title">Seus dados</h3>
+
+        <label>Nome</label>
+        <input type="text" id="nomeCliente" placeholder="Digite seu nome">
+
+        <label>Telefone</label>
+        <input type="text" id="telefoneCliente" placeholder="(DDD) 99999-9999">
+      </div>
+
+      <!-- PAGAMENTO -->
+      <div class="modal-section">
+        <h3 class="section-title">Pagamento</h3>
+
+        <label>Forma de pagamento</label>
         <select id="pagamento">
           <option value="cartao">Cartão</option>
           <option value="pix">Pix</option>
           <option value="dinheiro">Dinheiro</option>
         </select>
 
-        <div id="troco-container" style="display: none">
+        <div id="troco-container" class="fade" style="display:none;">
           <label>Troco para quanto?</label>
-          <input type="text" id="troco" placeholder="Ex: 50,00" />
+          <input type="text" id="troco" placeholder="Ex: 50,00">
         </div>
       </div>
 
-      <label>Seu nome:</label>
-      <input type="text" id="nomeCliente" placeholder="Digite seu nome" />
+      <!-- OBSERVAÇÕES -->
+      <div class="modal-section">
+        <h3 class="section-title">Observações</h3>
+        <textarea id="obs" placeholder="Ex: tirar cebola, ponto da carne..."></textarea>
+      </div>
 
-      <label>Telefone:</label>
-      <input type="text" id="telefoneCliente" placeholder="(DDD) 99999-9999" />
+      <!-- CUPOM -->
+      <div class="modal-section">
+        <h3 class="section-title">Cupom de desconto</h3>
+        <input type="text" id="cupom" placeholder="Ex: DESCONTO10">
+      </div>
 
-      <label>Observações:</label>
-      <textarea id="obs" placeholder="Ex: tirar cebola, ponto da carne..."></textarea>
+      <!-- RESUMO TOTAL -->
+      <p id="resumo-total" class="resumo-total">Total: R$ 0,00</p>
 
-      <label>Cupom de desconto:</label>
-      <input type="text" id="cupom" placeholder="Ex: DESCONTO10" />
+      <!-- BOTÃO FINAL -->
+      <button id="confirmar" class="btn-primary">Confirmar Pedido</button>
 
-      <button id="confirmar">Confirmar Pedido</button>
     </div>
   </div>
 
@@ -140,8 +260,8 @@
     <p>&copy; 2025 ALVORECER BURG. Todos os direitos reservados.</p>
   </footer>
 
+  <!-- JS -->
+  <script src="app.js"></script>
 
-<!-- JS -->
-<script src="app.js"></script>
 </body>
 </html>
