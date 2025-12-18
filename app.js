@@ -333,16 +333,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function criarCategoria(cat, container) {
     const secao = document.createElement("section");
-    secao.classList.add("categoria");
+  secao.classList.add("categoria");
 
-    secao.innerHTML = `
-      <h2>${cat.categoria}</h2>
-      <div class="cards"></div>
-    `;
+  secao.innerHTML = `
+    <h2>${cat.categoria}</h2>
+    <div class="cards"></div>
+    <button class="btn-ver-categoria">Ver mais</button>
+  `;
 
-    const cardsEl = secao.querySelector(".cards");
+  const cardsEl = secao.querySelector(".cards");
+  const btnVer = secao.querySelector(".btn-ver-categoria");
 
-    cat.produtos.forEach(prod => {
+  // Renderizar apenas 4 itens
+  const produtosVisiveis = cat.produtos.slice(0, 4);
+
+  function renderizar(lista) {
+    cardsEl.innerHTML = "";
+    lista.forEach(prod => {
       const card = document.createElement("div");
       card.classList.add("card");
       if (prod.combo) card.classList.add("combo");
@@ -351,27 +358,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
       card.innerHTML = `
         ${comboTag}
-        <img src="${prod.imagem}" alt="${prod.nome}">
+        <img src="${prod.imagem}">
         <h3>${prod.nome}</h3>
-
         <p class="descricao curta">${prod.descricao}</p>
         <button class="ver-mais">Ver mais</button>
-
         <span class="preco">R$ ${formatar(prod.preco)}</span>
-
         <div class="card-actions">
-          <button class="btn-add" data-produto="${prod.nome}" data-preco="${prod.preco}">
-            Adicionar
-          </button>
+          <button class="btn-add" data-produto="${prod.nome}" data-preco="${prod.preco}">Adicionar</button>
           <button class="btn-fav" data-produto="${prod.nome}">⭐</button>
         </div>
       `;
-
       cardsEl.appendChild(card);
     });
-
-    container.appendChild(secao);
   }
+
+  renderizar(produtosVisiveis);
+
+  let expandido = false;
+
+  btnVer.addEventListener("click", () => {
+    expandido = !expandido;
+
+    if (expandido) {
+      renderizar(cat.produtos);
+      btnVer.textContent = "Ver menos";
+    } else {
+      renderizar(produtosVisiveis);
+      btnVer.textContent = "Ver mais";
+    }
+
+    atualizarFavoritosVisual();
+  });
+
+  container.appendChild(secao);
+}
+
 
   // ======================================================
   // ✅ 7.3 EVENT DELEGATION (ADD AO CARRINHO + FAVORITOS)
