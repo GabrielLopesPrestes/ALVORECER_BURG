@@ -656,3 +656,192 @@ footer {
     box-shadow: 0 2px 6px rgba(0,0,0,0.4);
   }
 }
+
+
+/* ============================
+   SEÇÕES COM FUNDO PRETO
+============================ */
+#sobre,
+#servicos,
+#contato {
+  background: #000;
+  color: #fff;
+  padding: 60px 20px;
+}
+
+/* TÍTULOS */
+#sobre h2,
+#servicos h2,
+#contato h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #ff3d00;
+  letter-spacing: 1px;
+}
+
+#sobre h2::after,
+#servicos h2::after,
+#contato h2::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #ff3d00;
+  margin: 8px auto 0;
+  border-radius: 3px;
+}
+
+/* ============================
+   SOBRE NÓS (PREMIUM)
+============================ */
+.sobre-premium {
+  background: #000;
+}
+
+.sobre-container {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+}
+
+.sobre-texto {
+  flex: 1;
+  min-width: 300px;
+}
+
+.sobre-texto h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #ff3d00;
+}
+
+.sobre-texto p {
+  margin-bottom: 15px;
+  line-height: 1.7;
+  font-size: 17px;
+  color: #ddd;
+}
+
+.sobre-info {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.sobre-info div {
+  background: #111;
+  color: white;
+  padding: 18px;
+  border-radius: 14px;
+  flex: 1;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(255,61,0,0.25);
+  border: 1px solid #ff3d00;
+}
+
+.sobre-info h3 {
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: #ff3d00;
+}
+
+.sobre-imagem img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(255,61,0,0.4);
+}
+
+/* ============================
+   SERVIÇOS
+============================ */
+#servicos ul {
+  list-style: none;
+  max-width: 600px;
+  margin: auto;
+  padding: 0;
+}
+
+#servicos li {
+  background: #111;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  font-size: 17px;
+  color: #ddd;
+  border: 1px solid #ff3d00;
+  box-shadow: 0 4px 14px rgba(255,61,0,0.25);
+  text-align: center;
+}
+
+/* ============================
+   CONTATO (PREMIUM)
+============================ */
+.contato-container {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contato-item {
+  background: #111;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(255,61,0,0.25);
+  text-align: center;
+  min-width: 200px;
+  border: 1px solid #ff3d00;
+  transition: 0.25s ease;
+}
+
+.contato-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(255,61,0,0.35);
+}
+
+/* ÍCONES DE CONTATO */
+.contato-item .icon {
+  width: 55px;
+  height: 55px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  object-fit: contain;
+  background: #fff;
+  padding: 8px;
+  box-shadow: 0 3px 10px rgba(255,61,0,0.4);
+}
+
+.contato-item p {
+  color: #ddd;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+/* ============================
+   MOBILE
+============================ */
+@media (max-width: 480px) {
+  #sobre h2,
+  #servicos h2,
+  #contato h2 {
+    font-size: 24px;
+  }
+
+  .sobre-texto p {
+    font-size: 15px;
+  }
+
+  .contato-item {
+    min-width: 160px;
+  }
+
+  .contato-item .icon {
+    width: 45px;
+    height: 45px;
+  }
+}
