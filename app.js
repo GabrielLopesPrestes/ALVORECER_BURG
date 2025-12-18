@@ -2,7 +2,7 @@
 // ✅ 1. CONFIGURAÇÕES GERAIS
 // ======================================================
 
-const numeroWhatsApp = "5532988394464";
+const numeroWhatsApp = "5532984801891";
 
 // Coordenadas da hamburgueria
 const lojaLat = -21.76094;
@@ -774,3 +774,4 @@ document.addEventListener("DOMContentLoaded", () => {
   atualizarFavoritosVisual();
   carregarHistoricoPedidos();
 });
+
