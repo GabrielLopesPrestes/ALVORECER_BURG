@@ -1,26 +1,51 @@
 /* ============================
+   DESIGN SYSTEM (VARIÁVEIS)
+============================ */
+:root {
+  --cor-principal: #ff3d00;
+  --cor-principal-escura: #e63600;
+  --cor-fundo: #fafafa;
+  --cor-texto: #222;
+  --cor-branco: #ffffff;
+  --cor-cinza-claro: #f2f2f2;
+  --cor-cinza-borda: #dddddd;
+
+  --radius-card: 14px;
+  --radius-btn: 12px;
+  --sombra-suave: 0 3px 10px rgba(0,0,0,0.12);
+  --sombra-forte: 0 6px 18px rgba(0,0,0,0.22);
+
+  --fonte-base: Arial, Helvetica, sans-serif;
+}
+
+/* ============================
    RESET
 ============================ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--fonte-base);
 }
 
 body {
-  background: #fafafa;
-  color: #222;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
 }
 
 /* ============================
    HEADER
 ============================ */
 header {
-  background: #ff3d00;
+  background: var(--cor-principal);
   padding: 20px;
-  color: white;
+  color: var(--cor-branco);
   text-align: center;
+}
+
+header h1 {
+  font-size: 24px;
+  letter-spacing: 1px;
 }
 
 header nav ul {
@@ -33,16 +58,23 @@ header nav ul {
 }
 
 header nav a {
-  color: white;
+  color: var(--cor-branco);
   text-decoration: none;
   font-weight: bold;
   font-size: 15px;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: 0.2s;
+}
+
+header nav a:hover {
+  border-bottom-color: var(--cor-branco);
 }
 
 /* ============================
-   CATEGORIAS / CARDÁPIO
+   SEÇÕES GERAIS
 ============================ */
-#cardapio {
+section {
   padding: 20px;
 }
 
@@ -56,7 +88,23 @@ header nav a {
   text-align: center;
 }
 
-/* GRID RESPONSIVO */
+.categoria h2::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--cor-principal);
+  margin: 6px auto 0;
+  border-radius: 3px;
+}
+
+/* ============================
+   CARDÁPIO / GRID
+============================ */
+#cardapio {
+  padding: 20px;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -64,16 +112,22 @@ header nav a {
 }
 
 /* ============================
-   CARD
+   CARD DE PRODUTO
 ============================ */
 .card {
-  background: white;
+  background: var(--cor-branco);
   padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: var(--radius-card);
+  box-shadow: var(--sombra-suave);
   text-align: center;
   max-width: 220px;
   margin: auto;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-forte);
 }
 
 .card img {
@@ -105,7 +159,7 @@ header nav a {
 .ver-mais {
   background: none;
   border: none;
-  color: #ff3d00;
+  color: var(--cor-principal);
   font-size: 13px;
   cursor: pointer;
   margin-bottom: 6px;
@@ -118,31 +172,38 @@ header nav a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 6px;
 }
 
 .btn-add {
-  background: #ff3d00;
-  color: white;
+  background: linear-gradient(45deg, var(--cor-principal), #ff6a00);
+  color: var(--cor-branco);
   border: none;
   padding: 8px;
   width: 100%;
-  border-radius: 8px;
+  border-radius: var(--radius-btn);
   cursor: pointer;
   transition: 0.2s;
   font-size: 14px;
+  font-weight: bold;
 }
 
 .btn-add:hover {
-  background: #e63600;
+  background: linear-gradient(45deg, var(--cor-principal-escura), var(--cor-principal));
+}
+
+.btn-add:active {
+  transform: scale(0.96);
 }
 
 .btn-fav {
   background: #eee;
   border: none;
   padding: 6px 10px;
-  border-radius: 8px;
+  border-radius: var(--radius-btn);
   cursor: pointer;
   font-size: 18px;
+  transition: 0.2s;
 }
 
 .btn-fav.favorito {
@@ -153,18 +214,37 @@ header nav a {
    COMBOS
 ============================ */
 .card.combo {
-  border: 2px solid #ff3d00;
+  border: 2px solid var(--cor-principal);
   box-shadow: 0 0 12px rgba(255,61,0,0.4);
 }
 
 .combo-tag {
-  background: #ff3d00;
-  color: white;
+  background: var(--cor-principal);
+  color: var(--cor-branco);
   padding: 4px 8px;
   border-radius: 6px;
   font-size: 11px;
   display: inline-block;
   margin-bottom: 6px;
+}
+
+/* ============================
+   BOTÃO "VER MAIS" DA CATEGORIA
+============================ */
+.btn-ver-categoria {
+  display: block;
+  margin: 12px auto 0 auto;
+  background: var(--cor-cinza-claro);
+  border: 1px solid var(--cor-cinza-borda);
+  border-radius: var(--radius-btn);
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-ver-categoria:hover {
+  background: #e9e9e9;
 }
 
 /* ============================
@@ -174,8 +254,8 @@ header nav a {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #ff3d00;
-  color: white;
+  background: var(--cor-principal);
+  color: var(--cor-branco);
   border: none;
   padding: 14px 20px;
   border-radius: 50px;
@@ -185,7 +265,7 @@ header nav a {
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  box-shadow: var(--sombra-forte);
   transition: 0.25s ease;
   z-index: 9999;
 }
@@ -195,8 +275,8 @@ header nav a {
 }
 
 #badge {
-  background: white;
-  color: #ff3d00;
+  background: var(--cor-branco);
+  color: var(--cor-principal);
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 13px;
@@ -212,7 +292,7 @@ header nav a {
   top: 0;
   width: 300px;
   height: 100%;
-  background: white;
+  background: var(--cor-branco);
   box-shadow: -4px 0 12px rgba(0,0,0,0.2);
   transition: 0.3s ease;
   z-index: 9998;
@@ -226,10 +306,20 @@ header nav a {
   padding: 20px;
 }
 
+#carrinho-box h2 {
+  margin-bottom: 10px;
+}
+
+#lista-carrinho {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
 #lista-carrinho li {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  font-size: 14px;
 }
 
 .remover {
@@ -242,11 +332,11 @@ header nav a {
 ============================ */
 #btn-finalizar {
   width: 100%;
-  background: linear-gradient(45deg, #ff3d00, #ff6a00);
-  color: white;
+  background: linear-gradient(45deg, var(--cor-principal), #ff6a00);
+  color: var(--cor-branco);
   padding: 12px;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-btn);
   font-size: 17px;
   font-weight: bold;
   cursor: pointer;
@@ -260,7 +350,7 @@ header nav a {
 }
 
 /* ============================
-   MODAL
+   MODAL DE FINALIZAÇÃO
 ============================ */
 .modal {
   display: none;
@@ -273,24 +363,200 @@ header nav a {
   overflow-y: auto;
   background: rgba(0,0,0,0.6);
   padding: 20px;
+  backdrop-filter: blur(3px);
 }
 
 .modal-content.premium {
-  background: #fff;
+  background: var(--cor-branco);
   width: 95%;
   max-width: 420px;
   margin: auto;
   padding: 25px;
   border-radius: 18px;
   position: relative;
+  box-shadow: var(--sombra-forte);
 }
 
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.modal-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.modal-section {
+  margin-bottom: 25px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.modal-section input,
+.modal-section select,
+.modal-section textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+textarea {
+  height: 80px;
+  resize: none;
+}
+
+/* Resumo total no modal */
 .resumo-total {
   font-size: 18px;
   font-weight: bold;
   text-align: center;
   margin: 10px 0 15px 0;
-  color: #ff3d00;
+  color: var(--cor-principal);
+}
+
+/* Botão principal do modal */
+.btn-primary {
+  width: 100%;
+  background: var(--cor-principal);
+  color: var(--cor-branco);
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--cor-principal-escura);
+}
+
+/* Secundário / links */
+.btn-secondary {
+  background: var(--cor-cinza-claro);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.error-msg {
+  color: red;
+  font-size: 14px;
+  display: none;
+}
+
+/* ============================
+   SOBRE NÓS
+============================ */
+.sobre-premium {
+  padding: 60px 20px;
+  background: var(--cor-branco);
+}
+
+.sobre-container {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+}
+
+.sobre-texto {
+  flex: 1;
+  min-width: 300px;
+}
+
+.sobre-texto h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: var(--cor-principal);
+}
+
+.sobre-texto p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.sobre-info {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.sobre-info div {
+  background: var(--cor-principal);
+  color: var(--cor-branco);
+  padding: 15px;
+  border-radius: 12px;
+  flex: 1;
+  text-align: center;
+}
+
+.sobre-info h3 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.sobre-imagem {
+  flex: 1;
+  min-width: 300px;
+}
+
+.sobre-imagem img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: var(--sombra-forte);
+}
+
+/* ============================
+   CONTATO
+============================ */
+.contato-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contato-item {
+  background: var(--cor-branco);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: var(--sombra-suave);
+  text-align: center;
+  min-width: 200px;
+}
+
+.contato-item .icon {
+  width: 40px;
+  margin-bottom: 8px;
 }
 
 /* ============================
@@ -304,13 +570,89 @@ header nav a {
 }
 
 .pedido-card {
-  background: #fff;
+  background: var(--cor-branco);
   border-radius: 12px;
   padding: 15px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  box-shadow: var(--sombra-suave);
 }
 
 .pedido-card h3 {
   margin-bottom: 8px;
-  color: #ff3d00;
+  color: var(--cor-principal);
+}
+
+/* ============================
+   FOOTER
+============================ */
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* ============================
+   MOBILE (ATÉ 480px)
+============================ */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 20px;
+  }
+
+  .card {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .card img {
+    height: 110px;
+  }
+
+  .card h3 {
+    font-size: 15px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+
+  .preco {
+    font-size: 15px;
+  }
+
+  .card-actions button {
+    padding: 7px 8px;
+    font-size: 13px;
+  }
+
+  #btn-carrinho {
+    padding: 12px 18px;
+    font-size: 15px;
+  }
+
+  #carrinho-container {
+    width: 280px;
+  }
+}
+
+/* ============================
+   DARK MODE BÁSICO (OPCIONAL)
+============================ */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #111;
+    color: #eee;
+  }
+
+  .card,
+  .pedido-card,
+  .contato-item,
+  .modal-content.premium {
+    background: #1c1c1c;
+    color: #eee;
+  }
+
+  header {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
 }
