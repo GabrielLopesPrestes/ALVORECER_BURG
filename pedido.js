@@ -2,7 +2,7 @@ import { carrinho, total, limpar } from "./carrinho.js";
 import { formatar, carregar, salvar } from "./utils.js";
 import { atualizarUI } from "./ui.js";
 
-const numeroWhatsApp = "5532988394464";
+const numeroWhatsApp = "5532984801891";
 
 const taxas = {
   "Centro": 5,
@@ -92,3 +92,4 @@ export function enviarPedido() {
   limpar();
   atualizarUI();
 }
+
